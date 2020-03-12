@@ -1,0 +1,1 @@
+from .account_detail_view import AccountProfileView

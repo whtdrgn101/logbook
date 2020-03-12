@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="post-img thumb">
+                    {%if bow.picture_type %}
+                    <img alt="bow picture" src="data:{{object.picture_type}};base64,{{object.picture}}" />
+                    {% else %}
+                    <img alt="bow picture" src="{% static 'scorecard/img/missing_bow.jpg' %}" />
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="accordion">
+                    <div class="accordion-icon">
+                        <h6>Details</h6>
+                    </div>
+                    <div class="accordion-info active">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <span><strong>Name:</strong>{{object.name}} <a href="{% url 'bow-update' object.id %}""><span class="icon-tools"></span></a></span>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <span><strong>Type:</strong>{{object.bow_type}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span><strong>Year:</strong>{{object.year}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span><strong>Make:</strong>{{object.make}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span><strong>Model:</strong>{{object.model}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span><strong>Draw Weight:</strong>{{object.draw_weight}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-icon">
+                        <h6>Setup Info</h6>
+                    </div>
+                    <div class="accordion-info">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <span><strong>Brace Height:</strong>{{object.brace_height_inches}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span><strong>ATA Length:</strong>{{object.ata_distance_inches}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span><strong>Stabalizer Setup:</strong>{{object.stabalizer_setup}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span><strong>String/Cable Material:</strong>{{object.cable_material}}</span>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <span><strong>Rest Type:</strong>{{object.rest_type}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span><strong>Setup Notes:</strong>{{object.setup_notes}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h6>{{object.log_entry_date}} <a href="{% url 'log-entry-update' object.id %}"><span class="icon-tools"></span></a></h6>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span><strong>Bow: </strong>{{object.bow}}</span>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <strong>Notes:</strong>
+                <span>{{object.log_notes}}</span>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span><strong>Rounds:</strong><a href="{% url 'round-new' %}"> <i class="fa fa-plus-square"></i> Add Round</a></span>
+            </div>
+        </div>
+        <div class="row">
+            {% if rounds %}
+                {% for round in rounds %}
+                <div class="col-md-12">
+                    <span><a href="{% url 'round-update' round.id %}"><span class="icon-tools"></span></a> | </span>
+                    <span><strong>Score: </strong>{{ round.score }} | </span>
+                    <span><strong>Type: </strong>{{ round.round_type }} |</span>
+                    <span><a href="{% url 'round-delete' round.id %}"> <i class="fa fa-trash"></i></a> | </span>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

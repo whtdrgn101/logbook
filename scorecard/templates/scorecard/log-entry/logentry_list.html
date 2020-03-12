@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 mb-20">
+                <a href="{% url 'log-entry-new' %}"><button class="button btn-bg-dark btn-rdus mb-10">Add New Entry</button></a>
+            </div>
+        </div>
+        <div class="row">
+            {% if object_list %}
+                {% for log in object_list %}
+                <div class="col-sm-3 mb-20">
+                    <h6><a href="{% url 'log-entry-detail' log.id %}">{{log.log_entry_date}}</a></h6>
+                    <p>{{log.bow}}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+            <div class="col-sm-6 mb-20">
+                <h6>No Scorecards</h6>
+                <p>Please add a scorecard</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 mb-20">
+                <a href="{% url 'bow-new' %}"><button class="button btn-bg-dark btn-rdus mb-10">Add New Bow</button></a>
+            </div>
+        </div>
+        <div class="row">
+            {% if object_list %}
+                {% for bow in object_list %}
+                <div class="col-sm-3 mb-20">
+                    <h6><a href="{% url 'bow-detail' bow.id %}">{{bow}}</a> | <span><a href="{% url 'bow-delete' bow.id %}"> <i class="fa fa-trash"></i></a></span></h6>
+                    <p class="thumb-sm">{%if bow.picture_type %}
+                        <img alt="bow picture" src="data:{{bow.picture_type}};base64,{{bow.picture}}" />
+                        {% else %}
+                        <img alt="bow picture" src="{% static 'scorecard/img/missing_bow.jpg' %}" />
+                        {% endif %}
+                    </p>
+                </div>
+                {% endfor %}
+            {% else %}
+            <div class="col-sm-6 mb-20">
+                <h6>No Bows</h6>
+                <p>Please add a bow</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

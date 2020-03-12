@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang="en"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Always force latest IE rendering engine -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<meta name="description" content="Shooting log is a website purposed for helping competetive archers keep track of their scores, equipment, and journey though their archery careers">
+		<meta name="keywords" content="archery, nfaa, competetive, compound bow, olympic recurve, creative, agency">
+
+		<!-- Title -->
+		<title>
+            {% block title %}
+                {{ title|default:"Untitled Page" }}
+            {% endblock title %}
+        </title>
+
+   		<!-- Google fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Dosis:100,400,600,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+
+        {% load static %}
+
+		<!-- Font awesome Core CSS -->
+		<link rel="stylesheet" href="{% static "scorecard/css/font-awesome.min.css" %}">
+		<link rel="stylesheet" href="{% static "scorecard/css/et-line.css" %}">
+
+		<!-- bootstrap css -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- YouTubePopUp CSS -->
+		<link rel="stylesheet" href="{% static "scorecard/css/YouTubePopUp.css" %}">
+
+		<!-- magnific-popup CSS -->
+		<link rel="stylesheet" href="{% static "scorecard/css/magnific-popup.css" %}">
+
+		<!-- owl carousel CSS -->
+		<link rel="stylesheet" href="{% static "scorecard/css/owl.carousel.min.css" %}">
+		<link rel="stylesheet" href="{% static "scorecard/css/owl.theme.default.min.css" %}">
+
+		<!-- Custom style CSS -->
+		<link rel="stylesheet" href="{% static "scorecard/css/style.css" %}">
+
+		<!-- responsive CSS -->
+		<link rel="stylesheet" href="{% static "scorecard/css/responsive.css" %}">
+
+		<!--[if lt IE 9]-->
+		<script src="{% static "scorecard/js/html5shiv.min.js" %}"></script>
+		<!--[endif]-->
+	</head>
+	<body>
+
+		<!-- ====== Preloader ======  -->
+	    <div class="loading">
+			<div class="spinner">
+			  <div class="rect1"></div>
+			  <div class="rect2"></div>
+			  <div class="rect3"></div>
+			  <div class="rect4"></div>
+			  <div class="rect5"></div>
+			</div>
+		</div>
+		<!-- ======End Preloader ======  -->
+
+
+		<!-- Navigation start -->
+    <nav class="navbar navbar-custom tt-default-nav nav-dark" role="navigation">
+        <div class="container">
+
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#custom-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- logo -->
+            <a class="navbar-brand" href="#">SHOOTING LOG</a>
+          </div>
+      
+          <div class="collapse navbar-collapse" id="custom-collapse">
+      
+            <ul class="nav navbar-nav navbar-right">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				{% if user.is_authenticated %}
+				<li><a href="{% url 'log-entry-list' %}">Scorecards</a></li>
+				  <li><a href="{% url 'bow-list' %}">Bows</a></li>
+				{% endif %}
+              	<li><a href="{% url 'log-entry-list' %}">Blog</a></li>
+             
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li class="dropdown">
+					{% if user.is_authenticated %}
+						<li><a href="{% url 'profile' %}">Profile</a></li>
+						<li><a href="#" onclick="document.getElementById('logout_form').submit();" >Logout</a></li>
+						<form id="logout_form" action="{% url 'oidc_logout' %}" method="post">
+							{% csrf_token %}
+						</form>
+					{% else %}
+						<li><a href="{% url 'oidc_authentication_init' %}">Login w/Google</a></li>
+					{% endif %}
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div><!-- /.container -->
+    </nav>
+    <!-- Navigation end -->
+
+        <!-- ====== Header ======  -->
+        <header id="home" class="color-header">
+            <!-- header content -->
+            <div class="caption v-middle text-center">
+                <h2>{{title|default:"Untitled Page"}}</h2>
+            </div>
+        </header>
+
+        <!--====== Content ======-->
+        {% block content %}
+            <p>Placeholder text in base template. Replace with page content.</p>
+        {% endblock content %}
+        <!--====== Content end ======-->
+
+		<!--====== Footer ======-->
+		<footer>
+
+			<!-- main footer -->
+			<div class="main-footer">
+				<div class="container">
+					<div class="row">
+
+						<!-- item about -->
+						<div class="col-sm-4">
+							<div class="item-about">
+								<h4>Shooting Log</h4>
+								<p>A place for competetive shooters to keep track of and manage their path along their archery journey!</p>
+								<div class="social-icon">
+									<span><i class="fa fa-facebook" aria-hidden="true"></i></span>
+									<span><i class="fa fa-twitter" aria-hidden="true"></i></span>
+									<span><i class="fa fa-linkedin" aria-hidden="true"></i></span>
+									<span><i class="fa fa-github" aria-hidden="true"></i></span>
+								</div>
+							</div>
+						</div>
+
+						<!-- twity -->
+						<div class="col-sm-4">
+							<div class="twity">
+								<h6>LATEST NEWS</h6>
+								<span><i class="fa fa-twitter" aria-hidden="true"></i></span>
+								<p>Lorem ipsum dolor sit amet, consec tetur elit. In maximus ligula semper.Lorem ipsum dolor sit . http://envato/hisham007</p>
+							</div>
+
+							<div class="twity">
+								<span><i class="fa fa-twitter" aria-hidden="true"></i></span>
+								<p>Lorem ipsum dolor sit amet, consec tetur elit.  #webdesign</p>
+							</div>
+						</div>
+
+						<!-- subscribe -->
+						<div class="col-sm-4">
+							<div class="item">
+								<h6>GET IN TOUCH</h6>
+								<div class="sub-form">
+									<p>Subscribe To Get Latest News & Updates</p>
+									<input type="text" name="email" placeholder="Your Email">
+									<div class="btn-sub">
+										<button>Subscribe</button>
+									</div>
+								</div>
+								<div class="links">
+									<span><a href={% url 'home' %}>Home</a></span><span><a href="{% url 'about' %}">About</a></span><span><a href="{% url 'contact' %}">Contact</a></span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- sub footer -->
+			<div class="sub-footer text-center">
+				<div class="container">
+					<p>Copy Right &copy; By T. DeWees 2020 | All Rights Reserved.</p>
+				</div>
+			</div>
+		</footer>
+		<!--====== End Footer ======-->
+		
+		
+
+
+		
+		
+		<!--====== js ======-->
+
+
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+		<script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+
+	  	<!-- bootstrap -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<!-- singlePageNav -->
+		<script src="{% static "scorecard/js/jquery.singlePageNav.min.js" %}"></script>
+
+		<!-- YouTubePopUp -->
+		<script src="{% static "scorecard/js/YouTubePopUp.jquery.js" %}"></script>
+
+		<!-- magnific-popup -->
+		<script src="{% static "scorecard/js/jquery.magnific-popup.min.js" %}"></script>
+
+		<!-- owl carousel -->
+		<script src="{% static "scorecard/js/owl.carousel.min.js" %}"></script>
+
+		<!-- stellar js -->
+		<script src="{% static "scorecard/js/jquery.stellar.min.js" %}"></script>
+
+		<!-- jquery.waypoints.min js -->
+      	<script src="{% static "scorecard/js/jquery.waypoints.min.js" %}"></script>
+
+      	<!-- jquery.counterup.min js -->
+      	<script src="{% static "scorecard/js/jquery.counterup.min.js" %}"></script>
+
+		<!-- typed js -->
+      	<script src="{% static "scorecard/js/typed.js" %}"></script>
+
+      	<!-- isotope.pkgd.min js -->
+      	<script src="{% static "scorecard/js/isotope.pkgd.min.js" %}"></script>
+
+      	<!-- animated.headline js -->
+      	<script src="{% static "scorecard/js/animated.headline.js" %}"></script>
+
+      	<!-- validator js -->
+      	<script src="{% static "scorecard/js/validator.js" %}"></script>
+
+      	<!-- custom js -->
+      	<script src="{% static "scorecard/js/custom.js" %}"></script>
+
+	</body>
+</html>
