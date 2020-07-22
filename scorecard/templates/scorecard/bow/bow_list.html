@@ -17,10 +17,15 @@
                 {% for bow in object_list %}
                 <div class="col-sm-3 mb-20">
                     <h6><a href="{% url 'bow-detail' bow.id %}">{{bow}}</a> | <span><a href="{% url 'bow-delete' bow.id %}"> <i class="fa fa-trash"></i></a></span></h6>
-                    <p class="thumb-sm">{%if bow.picture_type %}
-                        <img alt="bow picture" src="data:{{bow.picture_type}};base64,{{bow.picture}}" />
+                    <p class="thumb-sm">
+                        {% if bow.picture_binary %}
+                            <img alt="bow picture" src="{% url 'bow-image' bow.id %}" />
                         {% else %}
-                        <img alt="bow picture" src="{% static 'scorecard/img/missing_bow.jpg' %}" />
+                            {%if bow.picture %}
+                            <img alt="bow picture" src="data:{{bow.picture_type}};base64,{{bow.picture}}" />
+                            {% else %}
+                            <img alt="bow picture" src="{% static 'scorecard/img/missing_bow.jpg' %}" />
+                            {% endif %}
                         {% endif %}
                     </p>
                 </div>

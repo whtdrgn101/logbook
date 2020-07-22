@@ -1,5 +1,5 @@
 from django.urls import path, re_path, include
-from .views.bow import BowListView, BowDetailView, BowCreateView, BowUpdateView, BowDeleteView
+from .views.bow import BowListView, BowDetailView, BowCreateView, BowUpdateView, BowDeleteView, BowImageView
 from .views.log_entry import LogEntryListView, LogEntryDetailView, LogEntryUpdateView, LogEntryCreateView
 from .views.round import RoundCreateView, RoundUpdateView, RoundDeleteView
 from .views.end import EndCreateView, EndUpdateView, EndDeleteView
@@ -25,5 +25,6 @@ urlpatterns = [
     path('bow/new', BowCreateView.as_view(), name="bow-new"),
     path('bow/update/<int:pk>', BowUpdateView.as_view(), name="bow-update"),
     path('bow/details/<int:pk>', BowDetailView.as_view(), name="bow-detail"),
+    path('bow/image/<int:pk>', BowImageView.as_view(), name="bow-image"),
     path('bow/delete/<int:pk>', BowDeleteView.as_view(), name="bow-delete"),
 ]

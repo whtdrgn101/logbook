@@ -33,7 +33,8 @@ class BowCreateView(LoginRequiredMixin, View):
             bow.stabalizer_setup = form.cleaned_data['stabalizer_setup']
             bow.rest_type = form.cleaned_data['rest_type']
             if len(request.FILES) > 0:
-                bow.picture = base64.b64encode(request.FILES['picture'].read()).decode("UTF-8")
+                bow.picture_binary = request.FILES['picture'].read()
+                bow.picture = base64.b64encode(bow.picture_binary).decode("UTF-8")
                 bow.picture_type = request.FILES['picture'].content_type
             bow.account_id = self.request.session.get('account_id', None)
             bow.save()

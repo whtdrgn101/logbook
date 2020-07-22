@@ -22,6 +22,7 @@ class Bow(models.Model):
     rest_type = models.CharField(null=True, max_length=2, choices = [('BL', 'Blade'), ('DA', 'Drop Away'), ('WB', 'Whicker-Biscuit')], default='BL')
     setup_notes = models.TextField(null=True)
     picture = models.TextField(null=True)
+    picture_binary = models.BinaryField(null=True)
     picture_type = models.CharField(null=True, max_length=25)
     account = models.ForeignKey(AccountProfile, on_delete=models.CASCADE)
 
